@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MLN Publisher — Authorization</title>
+<style>
+  :root { --bg: #fbfbf9; --ink: #1c2331; --muted: #5a6272; --accent: #1f4e8c; --card: #f1f2ef; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12161f; --ink: #e8eaf0; --muted: #9aa3b5; --accent: #7aa7dd; --card: #1a2029; }
+  }
+  body { background: var(--bg); color: var(--ink); font: 17px/1.6 "Segoe UI", system-ui, sans-serif;
+         margin: 0; display: grid; place-items: center; min-height: 100vh; }
+  main { text-align: center; padding: 2rem; max-width: 34rem; }
+  h1 { font-family: Georgia, serif; font-size: 1.5rem; }
+  code { display: block; background: var(--card); border-radius: 8px; padding: 1rem;
+         font-size: 1rem; word-break: break-all; margin: 1rem 0; user-select: all; }
+  button { background: var(--accent); color: #fff; border: 0; border-radius: 8px;
+           padding: .7rem 1.4rem; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  p { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>MLN Publisher authorized</h1>
+  <p id="msg">Copy this code and paste it into the pipeline window:</p>
+  <code id="code">…</code>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('code').textContent)">Copy code</button>
+</main>
+<script>
+  const p = new URLSearchParams(location.search);
+  const code = p.get("code");
+  document.getElementById("code").textContent = code || "(no code in URL — authorization may have been denied)";
+</script>
+</body>
+</html>
